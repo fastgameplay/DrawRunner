@@ -5,8 +5,8 @@ public class LineDrawer : MonoBehaviour{
     private Camera _cam;
 
     [SerializeField] Line _line;
+    [SerializeField] Vector3 _offset;
     [SerializeField] float _scale;
-    [SerializeField] float _distance;
 
     Line _currentLine;
 
@@ -15,13 +15,14 @@ public class LineDrawer : MonoBehaviour{
     private float _verticalInput {get {return input.AxisNormalized.y * _scale;}}
     void Awake(){
         input = TouchInput.Instance;
+        _line.transform.localPosition = _offset;
     }
  
  
     void Update() {
 
         if (input.Began) _line.Reset();
-        if(input.Hold) _line.SetPosition(new Vector3 (_horizontalInput,_verticalInput,_distance));
+        if(input.Hold) _line.SetPosition(new Vector3 (_horizontalInput,_verticalInput,0));
     }
 
 

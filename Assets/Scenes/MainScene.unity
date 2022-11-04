@@ -1999,9 +1999,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c28b278f41bcd7438007f325c6bc51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _linePrefab: {fileID: 1744288450}
-  _scale: 0.4
-  _distance: 0.2
+  _line: {fileID: 1744288450}
+  _offset: {x: 0, y: -3.47, z: 8}
+  _scale: 1.7
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

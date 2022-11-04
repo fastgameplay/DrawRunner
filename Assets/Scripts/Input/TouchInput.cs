@@ -20,6 +20,8 @@ public class TouchInput : MonoBehaviour
         }
     }
 
+    private Rect _inputArea;
+
     private Vector2 _centerPosition, _maxThreshold, _screenSize, _movementDelta;
 
     private bool _began, _hold;
@@ -45,8 +47,9 @@ public class TouchInput : MonoBehaviour
     void Awake(){
         _screenSize = new Vector2(Screen.width, Screen.height);
         _centerPosition = new Vector2( _screenSize.x*0.5f, _screenSize.y * 0.2f);
-        _maxThreshold = new Vector2(_screenSize.x * 0.45f, _screenSize.y * 0.15f);
-    
+        _maxThreshold = new Vector2(_screenSize.x * 0.9f, _screenSize.y * 0.3f);
+
+        
         
     }
 
