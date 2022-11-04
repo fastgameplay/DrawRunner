@@ -6,6 +6,8 @@ using UnityEngine;
 public class Line : MonoBehaviour{
     [SerializeField] private LineRenderer _renderer;
  
+    [SerializeField] float _scale;
+    [SerializeField] float _distanceBetweenPoints;
     private List<Vector2> _points = new List<Vector2>();
 
  
@@ -15,7 +17,7 @@ public class Line : MonoBehaviour{
         _points.Add(pos);
     
         _renderer.positionCount++;
-        _renderer.SetPosition(_renderer.positionCount-1,pos);
+        _renderer.SetPosition(_renderer.positionCount-1,pos*_scale);
  
     }
     public void Reset(){
@@ -25,6 +27,6 @@ public class Line : MonoBehaviour{
     private bool CanAppend(Vector3 pos) {
         if (_renderer.positionCount == 0) return true;
  
-        return Vector2.Distance(_renderer.GetPosition(_renderer.positionCount - 1), pos) >0.01f;
+        return Vector2.Distance(_renderer.GetPosition(_renderer.positionCount - 1), pos) > _distanceBetweenPoints;
     }
 }

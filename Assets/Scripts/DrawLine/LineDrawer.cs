@@ -6,13 +6,12 @@ public class LineDrawer : MonoBehaviour{
 
     [SerializeField] Line _line;
     [SerializeField] Vector3 _offset;
-    [SerializeField] float _scale;
 
     Line _currentLine;
 
     TouchInput input;
-    private float _horizontalInput {get {return input.AxisNormalized.x * _scale;}}
-    private float _verticalInput {get {return input.AxisNormalized.y * _scale;}}
+    private float _horizontalInput {get {return input.AxisNormalized.x;} }
+    private float _verticalInput {get {return input.AxisNormalized.y;} }
     void Awake(){
         input = TouchInput.Instance;
         _line.transform.localPosition = _offset;
