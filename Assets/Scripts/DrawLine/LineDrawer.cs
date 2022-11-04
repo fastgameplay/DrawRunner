@@ -3,24 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 public class LineDrawer : MonoBehaviour{
     private Camera _cam;
-    [SerializeField] private Line _linePrefab;
-    [SerializeField] private RectTransform _field;
- 
-    public const float RESOLUTION = .1f;
- 
-    private Line _currentLine;
-    void Start()
-    {
-         _cam = Camera.main;   
+    [SerializeField] Line _linePrefab;
+    
+    Line _currentLine;
+
+    void Awake(){
+        _cam = Camera.main;
     }
  
  
     void Update() {
-        Vector2 pos = _cam.ScreenToWorldPoint(Input.mousePosition);
-        Debug.Log(pos + " : " + Input.mousePosition);
+        Vector3 pos = GetMousePosition();
+
         if (Input.GetMouseButtonDown(0)) _currentLine = Instantiate(_linePrefab, transform.position, Quaternion.identity,transform);
- 
+
         if(Input.GetMouseButton(0)) _currentLine.SetPosition(pos);
+    }
+
+
+    private Vector3 GetMousePosition(){
+        Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+        return ray.origin + ray.direction;
     }
 
 }
