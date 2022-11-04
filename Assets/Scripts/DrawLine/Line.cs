@@ -6,13 +6,8 @@ using UnityEngine;
 public class Line : MonoBehaviour{
     [SerializeField] private LineRenderer _renderer;
  
-    private readonly List<Vector2> _points = new List<Vector2>();
+    private List<Vector2> _points = new List<Vector2>();
 
- 
-    void Update()
-    {
- 
-    }
  
     public void SetPosition(Vector3 pos) {
         if(!CanAppend(pos)) return;
@@ -23,7 +18,10 @@ public class Line : MonoBehaviour{
         _renderer.SetPosition(_renderer.positionCount-1,pos);
  
     }
- 
+    public void Reset(){
+        _renderer.positionCount = 0;
+        _points = new List<Vector2>();
+    }
     private bool CanAppend(Vector3 pos) {
         if (_renderer.positionCount == 0) return true;
  
