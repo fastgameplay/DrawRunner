@@ -15,8 +15,7 @@ public class TouchInput : MonoBehaviour
     //TODO change
     public Vector2 AxisNormalized{
         get{
-            Vector2 tempDelta = ValidateDelta(_movementDelta,_maxThreshold);
-            return new Vector2(tempDelta.x/_maxThreshold.x , tempDelta.y/_maxThreshold.y);
+            return new Vector2(_movementDelta.x/_maxThreshold.x -0.5f, _movementDelta.y/_maxThreshold.x -0.5f);
         }
     }
 
@@ -46,10 +45,10 @@ public class TouchInput : MonoBehaviour
  
     void Awake(){
         _screenSize = new Vector2(Screen.width, Screen.height);
-        _centerPosition = new Vector2( _screenSize.x*0.5f, _screenSize.y * 0.2f);
-        _maxThreshold = new Vector2(_screenSize.x * 0.9f, _screenSize.y * 0.3f);
-
-        
+        _centerPosition = new Vector2( _screenSize.x*0.05f, _screenSize.y * 0.05f);
+        _maxThreshold = new Vector2(_screenSize.x * 0.90f, _screenSize.y * 0.3f);
+        Debug.Log(_maxThreshold + ", and Center position: " + _centerPosition);
+        _inputArea = new Rect(_centerPosition.x,_centerPosition.y, _maxThreshold.x,_maxThreshold.y);
         
     }
 
@@ -72,8 +71,12 @@ public class TouchInput : MonoBehaviour
         else if (Input.GetMouseButtonUp(0)) 
             _hold = false;
 
-        if(Input.GetMouseButton(0)) 
-            _movementDelta = (Vector2)Input.mousePosition - _centerPosition;
+        if(Input.GetMouseButton(0)) {
+            if(_inputArea.Contains((Vector2)Input.mousePosition)){
+                _movementDelta = (Vector2)Input.mousePosition - _centerPosition;
+                Debug.Log("Input position: " + (Vector2)Input.mousePosition+", MovementDelta: " +_movementDelta + ", NormilizedAxis: " + AxisNormalized);
+            }
+        }
         
     }
 
@@ -86,20 +89,11 @@ public class TouchInput : MonoBehaviour
             else if (Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled) {
                 _hold = false;
             }
-
-            _movementDelta = (Vector2)Input.mousePosition - _centerPosition;
+            
+            if(_inputArea.Contains((Vector2)Input.mousePosition))
+                _movementDelta = (Vector2)Input.mousePosition + _centerPosition;
 
         }
     }
 
-
-    private Vector2 ValidateDelta(Vector2 movementDelta, Vector2 maxValue){
-        if(movementDelta.x > maxValue.x) movementDelta.x = maxValue.x;
-        else if(movementDelta.x < -maxValue.x) movementDelta.x = -maxValue.x;
-
-        if(movementDelta.y > maxValue.y) movementDelta.y = maxValue.y;
-        else if (movementDelta.y < -maxValue.y) movementDelta.y = -maxValue.y;
-
-        return movementDelta;
-    }
 }
