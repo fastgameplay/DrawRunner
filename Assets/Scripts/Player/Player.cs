@@ -1,32 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Player : MonoBehaviour
-{
-    [SerializeField] float _speed = 1f;
-
+[RequireComponent(typeof(PlayerMovement))]
+public class Player : MonoBehaviour{
     PlayerContainer _container;
-    Vector3 _targetPosition;
-    bool isActive;
+    PlayerMovement _movement;
 
-    void Update(){
-       movement();
+
+    void Awake(){
+        _movement = GetComponent<PlayerMovement>();
     }
 
-    public void MoveTo(Vector2 pos){
-        isActive = true;
-        _targetPosition = new Vector3(pos.x, 0, pos.y);
+    public void SetContainer(PlayerContainer container){
+        _container = container;
     }
 
-    private void movement(){
-        if (Vector3.Distance(_targetPosition, transform.localPosition) > 0.01){
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, _targetPosition, _speed * Time.deltaTime);
-            return;
-        }
-        if(isActive == true){
-            transform.localPosition = _targetPosition;
-            isActive = false;
-        }
+    public void MoveTo(Vector2 movement){
+        _movement.MoveTo(movement);
     }
 }
