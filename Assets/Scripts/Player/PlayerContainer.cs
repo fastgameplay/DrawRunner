@@ -54,6 +54,7 @@ public class PlayerContainer : MonoBehaviour{
         _players.Add(player);
 
         if(_points != null)
+            _players.RemoveAll(item => item == null);
             UpdatePlayerPositions();
     }
 
@@ -64,4 +65,6 @@ public class PlayerContainer : MonoBehaviour{
             AddPlayer();
         }
     }
+
+
 }
