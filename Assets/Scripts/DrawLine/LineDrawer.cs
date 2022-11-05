@@ -21,7 +21,8 @@ public class LineDrawer : MonoBehaviour{
     void Update() {
 
         if (input.Began) _line.Reset();
-        if(input.Hold) _line.SetPosition(new Vector3 (_horizontalInput,_verticalInput,0));
+        if (input.Hold) _line.SetPosition(new Vector3 (_horizontalInput,_verticalInput,0));
+        if(input.Ended) _line.ReadyToApply = true;
     }
 
 

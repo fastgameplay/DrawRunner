@@ -4,17 +4,19 @@ using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Line : MonoBehaviour{
-    [SerializeField] private LineRenderer _renderer;
- 
+    public List<Vector2> Points {get; private set;}
+    public bool ReadyToApply {get; set;}
+    [SerializeField] LineRenderer _renderer;
     [SerializeField] float _scale;
     [SerializeField] float _distanceBetweenPoints;
-    private List<Vector2> _points = new List<Vector2>();
-
- 
+    
+    void Awake(){
+        Reset();
+    }
     public void SetPosition(Vector3 pos) {
         if(!CanAppend(pos)) return;
         
-        _points.Add(pos);
+        Points.Add(pos/1.2);
     
         _renderer.positionCount++;
         _renderer.SetPosition(_renderer.positionCount-1,pos*_scale);
@@ -22,7 +24,7 @@ public class Line : MonoBehaviour{
     }
     public void Reset(){
         _renderer.positionCount = 0;
-        _points = new List<Vector2>();
+        Points = new List<Vector2>();
     }
     private bool CanAppend(Vector3 pos) {
         if (_renderer.positionCount == 0) return true;
