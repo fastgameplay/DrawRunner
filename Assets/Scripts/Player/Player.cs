@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     PlayerContainer _container;
     Vector3 _targetPosition;
     bool isActive;
+
     void Update(){
        movement();
     }

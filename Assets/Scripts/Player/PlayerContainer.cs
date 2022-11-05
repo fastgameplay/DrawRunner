@@ -50,6 +50,7 @@ public class PlayerContainer : MonoBehaviour{
 
     public void AddPlayer(){
         Player player = Instantiate(_playerPrefab, transform.position, Quaternion.identity, transform);
+        player.transform.rotation = Quaternion.Euler(Vector3.zero);
         _players.Add(player);
 
         if(_points != null)
