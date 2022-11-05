@@ -7,20 +7,20 @@ public class PlayerSpawner : MonoBehaviour{
 
     PlayerContainer _playerContainer;
     Vector2[] _initialPositions;
-    
+    float _scale;
     void Awake(){
         _playerContainer = GetComponent<PlayerContainer>();
+        _scale = 1/ (float)_startSize.x;
     }
     void Start(){
         _initialPositions = new Vector2[_startSize.y * _startSize.x];
         int i = 0;
         for (int y = 0; y < _startSize.y; y ++){
             for (int x = 0; x < _startSize.x; x ++){
-                _initialPositions[i] = new Vector2(x-0.5f, y)/10;
+                _initialPositions[i] = new Vector2((_scale * x)-0.5f, _scale*y);
                 i++;
             }
         }
-            Debug.Log(_initialPositions);
         _playerContainer.UpdatePoints(_initialPositions);
         _playerContainer.AddPlayer( _initialPositions.Length);
     }

@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     }
 
     private void movement(){
-        Debug.Log(Vector3.Distance(_targetPosition, transform.localPosition ) > 0.01);
         if (Vector3.Distance(_targetPosition, transform.localPosition) > 0.01){
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, _targetPosition, _speed * Time.deltaTime);
             return;

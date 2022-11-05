@@ -61,8 +61,6 @@ public class TouchInput : MonoBehaviour
     UpdateMobile();
 #endif
 
-    if(Ended == true)
-        Debug.Log("ENDED");
     }
 
     private void UpdateStandalone(){

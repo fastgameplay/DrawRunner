@@ -16,7 +16,7 @@ public class Line : MonoBehaviour{
     public void SetPosition(Vector3 pos) {
         if(!CanAppend(pos)) return;
         
-        Points.Add(pos/1.2);
+        Points.Add(pos/1.2f);
     
         _renderer.positionCount++;
         _renderer.SetPosition(_renderer.positionCount-1,pos*_scale);
