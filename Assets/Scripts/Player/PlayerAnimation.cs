@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimation : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+public class PlayerAnimation : MonoBehaviour{
+    [SerializeField] Animator _animator;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+
+
+    public void Idle(){
+        _animator.Play("Idle");
+    }
+    
+    public void Run(){
+        _animator.Play("Running");
+    }
+    
+    public void Win(){
+        _animator.Play("VictoryIdle");
     }
 }

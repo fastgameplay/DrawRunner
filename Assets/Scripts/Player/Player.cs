@@ -2,20 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(PlayerMovement))]
-public class Player : MonoBehaviour{
-    PlayerContainer _container;
-    PlayerMovement _movement;
+[RequireComponent(typeof(PlayerCollision))]
+[RequireComponent(typeof(PlayerAnimation))]
 
+public class Player : MonoBehaviour{
+    public PlayerContainer Container {get; private set;}
+    public PlayerAnimation Anim {get; private set;}
+    PlayerMovement _movement;
 
     void Awake(){
         _movement = GetComponent<PlayerMovement>();
+        Anim = GetComponent<PlayerAnimation>();
     }
 
     public void SetContainer(PlayerContainer container){
-        _container = container;
+        Container = container;
     }
 
     public void MoveTo(Vector2 movement){
+        Anim.Run();
         _movement.MoveTo(movement);
     }
+
+    public void WinDance(){
+        Anim.Win();
+    }
+
+
 }
