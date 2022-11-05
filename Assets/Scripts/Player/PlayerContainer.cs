@@ -27,19 +27,25 @@ public class PlayerContainer : MonoBehaviour{
         }
     }
 
+
+    void UpdatePlayerPositions(){
+        if(_players.Count > _points.Length){
+            _safeJumpSize = 1;
+        }
+        else {
+            _safeJumpSize = _points.Length / _players.Count;
+        }
+
+        for (int i = 0; i < _players.Count; i++){
+            _players[i].MoveTo(_points[(_safeJumpSize*i+1) % _points.Length] );
+        } 
+    }
+
     void UpdatePoints(){
         _points = _drawLine.Points.ToArray();
     }
     public void UpdatePoints(Vector2[] points){
         _points = points;
-    }
-
-    void UpdatePlayerPositions(){
-        _safeJumpSize = _points.Length / _players.Count;
-
-        for (int i = 0; i < _players.Count; i++){
-            _players[i].MoveTo(_points[Random.Range(0,_points.Length)] );
-        } 
     }
 
     public void AddPlayer(){
